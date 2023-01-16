@@ -61,9 +61,17 @@ while running:
 
     screen.fill(0)
 
+
     snake_x += snake_dir_x * snake_size
     snake_y += snake_dir_y * snake_size
-
+    if snake_y <0:
+        snake_y=height
+    elif snake_y >height:
+        snake_y=0
+    if snake_x <0:
+        snake_x= width
+    elif snake_x> width:
+        snake_x=0
     for rect in snake_body:
         rect.x = snake_x
         rect.y = snake_y
