@@ -12,7 +12,7 @@ screen = pg.display.set_mode(window_size)
 # Set the title of the window
 pg.display.set_caption("My Snake Game")
 
-
+fff
 
 # Run the game loop
 running = True
