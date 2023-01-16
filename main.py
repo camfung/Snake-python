@@ -1,7 +1,7 @@
 import pygame as pg
 
 # Initialize pygame library
-pygame.init()
+pg.init()
 
 # Set the size of the window
 window_size = (width, height) = (500, 500)
@@ -12,7 +12,12 @@ screen = pg.display.set_mode(window_size)
 # Set the title of the window
 pg.display.set_caption("My Snake Game")
 
+#setting up the snake
+snake_body = []
 
+snake_body.append()
+
+#adding the head to the body
 
 # Run the game loop
 running = True
