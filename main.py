@@ -1,6 +1,6 @@
 import pygame as pg
 
-# Initialize pygame library
+# Initialize pg library
 pg.init()
 
 # Set the size of the window
@@ -32,6 +32,15 @@ while running:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             running = False
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_UP:
+                snake_y -= snake_size
+            elif event.key == pg.K_DOWN:
+                snake_y += snake_size
+            elif event.key == pg.K_LEFT:
+                snake_x -= snake_size
+            elif event.key == pg.K_RIGHT:
+                snake_x += snake_size
 
     for rect in snake_body:
         pg.draw.rect(screen, (255, 255, 255), rect)
@@ -41,5 +50,5 @@ while running:
 
 
 
-# Clean up and quit pygame
+# Clean up and quit pg
 pg.quit()
