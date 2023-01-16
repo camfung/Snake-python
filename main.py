@@ -30,11 +30,22 @@ snake_dir_y = 0
 
 
 snake_body = []
+snake_pos = []
 
 snake_head = pg.Rect(snake_x, snake_y, snake_size, snake_size)
 
+
+
+
 #adding the head to the body
 snake_body.append(snake_head)
+snake_pos.append([snake_x, snake_y])
+
+# setting up the food
+food_x = 25
+food_y = 25
+
+food_rect = pg.Rect(food_x, food_y, snake_size, snake_size)
 
 # Run the game loop
 running = True
@@ -62,19 +73,50 @@ while running:
     screen.fill(0)
 
 
-    snake_x += snake_dir_x * snake_size
-    snake_y += snake_dir_y * snake_size
-    if snake_y <0:
-        snake_y=height
-    elif snake_y >height:
-        snake_y=0
-    if snake_x <0:
-        snake_x= width
-    elif snake_x> width:
-        snake_x=0
-    for rect in snake_body:
-        rect.x = snake_x
-        rect.y = snake_y
+    snake_pos[0][0] += snake_dir_x * snake_size
+    snake_pos[0][1] += snake_dir_y * snake_size
+
+    # check for if its colliding with the food
+    if snake_pos[0][1] == food_y and snake_pos[0][0] == food_x:
+        # going right
+        new_x = 0
+        new_y = 0
+        if snake_dir_x == 1 and snake_dir_y == 0:
+            new_x = snake_pos[0][0] - snake_size
+            new_y = snake_pos[0][1]
+            snake_body.append(pg.Rect(new_x, new_y, snake_size, snake_size))
+            snake_pos.append([new_x, new_y])
+        elif snake_dir_x == -1 and snake_dir_y == 0:
+            new_x = snake_pos[0][0] + snake_size
+            new_y = snake_pos[0][1]
+            snake_body.append(pg.Rect(new_x, new_y, snake_size, snake_size))
+            snake_pos.append([new_x, new_y])
+        elif snake_dir_x == 0 and snake_dir_y == 1:
+            new_x = snake_pos[0][0]
+            new_y = snake_pos[0][1] - snake_size
+            snake_body.append(pg.Rect(new_x, new_y, snake_size, snake_size))
+            snake_pos.append([new_x, new_y])
+        elif snake_dir_x == 0 and snake_dir_y == -1:
+            new_x = snake_pos[0][0]
+            new_y = snake_pos[0][1] + snake_size
+            snake_body.append(pg.Rect(new_x, new_y, snake_size, snake_size))
+            snake_pos.append([new_x, new_y])
+
+
+    if snake_pos[0][1] < 0:
+        snake_pos[0][1] = height
+    elif snake_pos[0][1] > height:
+        snake_pos[0][1] = 0
+    if snake_pos[0][0] < 0:
+        snake_pos[0][0] = width
+    elif snake_pos[0][0] > width:
+        snake_pos[0][0] = 0
+
+    pg.draw.rect(screen, (255, 0, 0), food_rect)
+    for i in range(len(snake_body)):
+        rect = snake_body[i]
+        rect.x = snake_pos[i][0]
+        rect.y = snake_pos[i][1]
         pg.draw.rect(screen, (255, 255, 255), rect)
 
     pg.display.flip()
@@ -84,3 +126,4 @@ while running:
 
 # Clean up and quit pg
 pg.quit()
+
