@@ -22,4 +22,4 @@ while running:
             running = False
 
 # Clean up and quit pygame
-pygame.quit()
+pg.quit()
