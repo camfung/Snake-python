@@ -45,13 +45,20 @@ while running:
             running = False
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_UP:
-                snake_y -= snake_size
+                snake_dir_y = -1
+                snake_dir_x = 0
             elif event.key == pg.K_DOWN:
-                snake_y += snake_size
+                snake_dir_x = 0
+                snake_dir_y = 1
             elif event.key == pg.K_LEFT:
-                snake_x -= snake_size
+                snake_dir_x = -1
+                snake_dir_y = 0
             elif event.key == pg.K_RIGHT:
-                snake_x += snake_size
+                snake_dir_x= 1
+                snake_dir_y= 0
+
+
+
     screen.fill(0)
 
     snake_x += snake_dir_x * snake_size
