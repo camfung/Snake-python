@@ -1,4 +1,9 @@
 import pygame as pg
+import time
+
+fps = 5
+
+clock = pg.time.Clock()
 
 # Initialize pg library
 pg.init()
@@ -19,6 +24,11 @@ snake_y = 250
 
 snake_size = 25
 
+snake_dir_x = 1
+
+snake_dir_y = 0
+
+
 snake_body = []
 
 snake_head = pg.Rect(snake_x, snake_y, snake_size, snake_size)
@@ -29,6 +39,7 @@ snake_body.append(snake_head)
 # Run the game loop
 running = True
 while running:
+    clock.tick(fps)
     for event in pg.event.get():
         if event.type == pg.QUIT:
             running = False
@@ -41,12 +52,17 @@ while running:
                 snake_x -= snake_size
             elif event.key == pg.K_RIGHT:
                 snake_x += snake_size
-        pg.display.flip()
+    screen.fill(0)
+
+    snake_x += snake_dir_x * snake_size
+    snake_y += snake_dir_y * snake_size
+
     for rect in snake_body:
         rect.x = snake_x
         rect.y = snake_y
         pg.draw.rect(screen, (255, 255, 255), rect)
 
+    pg.display.flip()
 
 
 
