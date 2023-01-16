@@ -22,11 +22,9 @@ snake_size = 25
 snake_body = []
 
 snake_head = pg.Rect(snake_x, snake_y, snake_size, snake_size)
-print(snake_head)
 
 #adding the head to the body
 snake_body.append(snake_head)
-
 
 # Run the game loop
 running = True
@@ -37,6 +35,10 @@ while running:
 
     for rect in snake_body:
         pg.draw.rect(screen, (255, 255, 255), rect)
+
+    pg.display.flip()
+
+
 
 
 # Clean up and quit pygame
