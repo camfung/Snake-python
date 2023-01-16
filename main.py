@@ -41,11 +41,12 @@ while running:
                 snake_x -= snake_size
             elif event.key == pg.K_RIGHT:
                 snake_x += snake_size
-
+        pg.display.flip()
     for rect in snake_body:
+        rect.x = snake_x
+        rect.y = snake_y
         pg.draw.rect(screen, (255, 255, 255), rect)
 
-    pg.display.flip()
 
 
 
