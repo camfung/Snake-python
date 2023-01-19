@@ -120,10 +120,7 @@ while running:
 
     pg.display.flip()
 
-    # check if the snake has collided with the edge of the screen
-    if snake_pos[0][0] < 0 or snake_pos[0][0] > width or snake_pos[0][1] < 0 or snake_pos[0][1] > height:
-        running = False
-        print("Game Over")
+
 
     # check if the snake has collided with its own body
     for i in range(1, len(snake_body)):
@@ -131,6 +128,47 @@ while running:
             running = False
             print("Game Over")
 
+
+    # check for collision with the food
+    if snake_pos[0][0] == food_x and snake_pos[0][1] == food_y:
+        # randomly place the food in a new location
+        random=100
+
+        food_x =random
+        food_rect = pg.Rect(food_x, food_y, snake_size, snake_size)
+
+        # grow the snake
+        new_x = 0
+        new_y = 0
+        if snake_dir_x == 1 and snake_dir_y == 0:
+            new_x = snake_pos[-1][0] - snake_size
+            new_y = snake_pos[-1][1]
+            snake_body.append(pg.Rect(new_x, new_y, snake_size, snake_size))
+            snake_pos.append([new_x, new_y])
+        elif snake_dir_x == -1 and snake_dir_y == 0:
+            new_x = snake_pos[-1][0] + snake_size
+            new_y = snake_pos[-1][1]
+            snake_body.append(pg.Rect(new_x, new_y, snake_size, snake_size))
+            snake_pos.append([new_x, new_y])
+        elif snake_dir_x == 0 and snake_dir_y == 1:
+            new_x = snake_pos[-1][0]
+            new_y = snake_pos[-1][1] - snake_size
+            snake_body.append(pg.Rect(new_x, new_y, snake_size, snake_size))
+            snake_pos.append([new_x, new_y])
+        elif snake_dir_x == 0 and snake_dir_y == -1:
+            new_x = snake_pos[-1][0]
+            new_y = snake_pos[-1][1] + snake_size
+            snake_body.append(pg.Rect(new_x, new_y, snake_size, snake_size))
+            snake_pos.append([new_x, new_y])
+
+
+
+
 # Clean up and quit pg
 pg.quit()
+
+
+
+
+
 
