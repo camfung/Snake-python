@@ -69,7 +69,6 @@ while running:
                 snake_dir_y= 0
 
 
-
     screen.fill(0)
 
 
@@ -78,7 +77,7 @@ while running:
 
     # check for if its colliding with the food
     if snake_pos[0][1] == food_y and snake_pos[0][0] == food_x:
-        # going right
+        # going rigth
         new_x = 0
         new_y = 0
         if snake_dir_x == 1 and snake_dir_y == 0:
@@ -121,8 +120,16 @@ while running:
 
     pg.display.flip()
 
+    # check if the snake has collided with the edge of the screen
+    if snake_pos[0][0] < 0 or snake_pos[0][0] > width or snake_pos[0][1] < 0 or snake_pos[0][1] > height:
+        running = False
+        print("Game Over")
 
-
+    # check if the snake has collided with its own body
+    for i in range(1, len(snake_body)):
+        if snake_pos[0][0] == snake_pos[i][0] and snake_pos[0][1] == snake_pos[i][1]:
+            running = False
+            print("Game Over")
 
 # Clean up and quit pg
 pg.quit()
