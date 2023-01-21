@@ -1,4 +1,5 @@
 import pygame as pg
+import random
 import time
 
 fps = 5
@@ -132,9 +133,13 @@ while running:
     # check for collision with the food
     if snake_pos[0][0] == food_x and snake_pos[0][1] == food_y:
         # randomly place the food in a new location
-        random=100
 
-        food_x =random
+        random_array = range(0, width, 25)
+
+        food_x = random_array[random.randint(0, len(random_array))-1]
+
+        food_y = random_array[random.randint(0, len(random_array))-1]
+
         food_rect = pg.Rect(food_x, food_y, snake_size, snake_size)
 
         # grow the snake
